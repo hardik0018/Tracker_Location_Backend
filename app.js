@@ -8,7 +8,7 @@ const cors = require("cors");
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://track-location-eight.vercel.app/",
+    origin: "https://track-location-eight.vercel.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
