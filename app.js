@@ -8,12 +8,7 @@ require("dotenv").config();
 
 const server = createServer(app);
 const io = new Server(server, {
-  transports: ["websocket"],
-  cors: {
-    origin: process.env.VITE_PUBLIC_HOST,
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
+  transports: ["websocket"]
 });
 
 app.use(express.json());
@@ -38,6 +33,10 @@ io.on("connection", (socket) => {
       markers[socket.id] = { latitude, longitude };
     }
     socket.emit("All-location", markers);
+  });
+
+  socket.on("connect_error", (err) => {
+   console.log(err)
   });
 });
 
