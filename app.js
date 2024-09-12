@@ -4,11 +4,12 @@ const { createServer } = require("http");
 const path = require("path");
 const { Server } = require("socket.io");
 const cors = require("cors");
+require("dotenv").config();
 
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://track-location-eight.vercel.app",
+    origin: process.env.VITE_PUBLIC_HOST,
     methods: ["GET", "POST"],
     credentials: true,
   },
