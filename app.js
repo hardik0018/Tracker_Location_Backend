@@ -8,6 +8,7 @@ require("dotenv").config();
 
 const server = createServer(app);
 const io = new Server(server, {
+  transports: ["websocket"],
   cors: {
     origin: process.env.VITE_PUBLIC_HOST,
     methods: ["GET", "POST"],
@@ -17,7 +18,6 @@ const io = new Server(server, {
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, "public")));
 const markers = {};
 
 io.on("connection", (socket) => {
@@ -37,7 +37,6 @@ io.on("connection", (socket) => {
     if (!markers[socket.id]) {
       markers[socket.id] = { latitude, longitude };
     }
-    console.log(markers);
     socket.emit("All-location", markers);
   });
 });
