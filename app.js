@@ -13,6 +13,7 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
     credentials: true,
   },
+  rejectUnauthorized: false
 });
 
 app.use(express.json());
