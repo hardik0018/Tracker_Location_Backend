@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const http = require("http").createServer(app);
+const https = require("https").createServer(app);
 require("dotenv").config();
-const socketIo = require("socket.io")(http, {
+const socketIo = require("socket.io")(https, {
   cors: {
     origin: process.env.VITE_PUBLIC_HOST,
     methods: ["GET", "POST"],
@@ -10,12 +10,11 @@ const socketIo = require("socket.io")(http, {
   },
 });
 
-
 const markers = {};
 
-http.listen(4000, () => {
+https.listen(4000, () => {
   socketIo.on("connection", (socket) => {
-    console.log("connection", socket.id, 23);
+    console.log("connectison", socket.id, 23);
     socket.on("disconnect", () => {
       socket.emit("user-disconnect", socket.id);
     });
