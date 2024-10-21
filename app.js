@@ -19,7 +19,9 @@ const server = app.listen(PORT, () => {
 const io = new socketIo.Server(server, {
   cors: {
     origin: process.env.BASE_URL,
+    credentials: true
   },
+  { transports: ['websocket', 'polling', 'flashsocket'] }
 });
 
 io.on("connection", (socket) => {
