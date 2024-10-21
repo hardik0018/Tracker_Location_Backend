@@ -18,7 +18,7 @@ const server = app.listen(PORT, () => {
 
 const io = new socketIo.Server(server, {
   cors: {
-    origin: process.env.VITE_PUBLIC_HOST,
+    origin: process.env.BASE_URL,
   },
 });
 
